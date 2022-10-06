@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { FormControlContext } from './form-control';
+import FormHelperMessage from './form-helper-message';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -15,8 +16,6 @@ export default function FormErrorMessage({ children, ...props }: Props) {
   }
 
   return (
-    <p {...props} className={'text-sm font-light text-red-500'}>
-      {children}
-    </p>
+    <FormHelperMessage className={'text-red-600'}>{children}</FormHelperMessage>
   );
 }

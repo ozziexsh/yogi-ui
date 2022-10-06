@@ -14,7 +14,7 @@ export default function Th({ children, ...props }: Props) {
       {...props}
       className={twMerge(
         classNames(
-          'px-4 py-2 text-left text-sm font-semibold uppercase',
+          'px-4 py-2 text-left text-sm font-semibold uppercase text-neutral-700',
           props.className,
         ),
       )}

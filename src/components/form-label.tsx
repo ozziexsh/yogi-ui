@@ -16,11 +16,13 @@ export default function FormLabel({ children, className, ...props }: Props) {
     <label
       {...props}
       htmlFor={props.htmlFor || formControl?.id}
-      className={twMerge(classNames('font-semibold', className))}
+      className={twMerge(
+        classNames('text-sm font-medium text-gray-700', className),
+      )}
     >
       <span className={'inline-block'}>{children}</span>
       {formControl?.required ? (
-        <span className={'ml-2 inline-block text-red-400'}>*</span>
+        <span className={'ml-1 inline-block text-red-400'}>*</span>
       ) : null}
     </label>
   );

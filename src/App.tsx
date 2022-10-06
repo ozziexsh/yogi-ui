@@ -19,6 +19,7 @@ import Tr from './components/tr';
 import Th from './components/th';
 import Tbody from './components/tbody';
 import Td from './components/td';
+import Switch from './components/switch';
 
 function App() {
   const [radioGroup, setRadioGroup] = useState('oranges');
@@ -26,6 +27,7 @@ function App() {
     'apples',
     'oranges',
   ]);
+  const [sw, setSw] = useState(false);
 
   const colors = [
     'slate',
@@ -77,32 +79,27 @@ function App() {
         <h1 className={'text-4xl'}>Buttons</h1>
 
         <div className="space-y-4">
-          {colors.map(color => (
-            <div key={color} className="flex items-center space-x-4">
-              <Button colorScheme={color}>Default</Button>
-              <Button colorScheme={color} variant={'outline'}>
-                Outline
-              </Button>
-              <Button colorScheme={color} variant={'ghost'}>
-                Ghost
-              </Button>
-              <Button colorScheme={color} variant={'link'}>
-                Link
-              </Button>
-            </div>
-          ))}
-          <div className="flex items-center space-x-4">
-            <Button loading={true}>Default</Button>
-            <Button loading={true} variant={'outline'}>
-              Outline
-            </Button>
-            <Button loading={true} variant={'ghost'}>
-              Ghost
-            </Button>
-            <Button loading={true} variant={'link'}>
-              Link
-            </Button>
-          </div>
+          {colors.flatMap(color =>
+            [false, true].flatMap(loading => (
+              <div
+                key={`${color}-${loading}`}
+                className="flex items-center space-x-4"
+              >
+                {(['solid', 'subtle', 'ghost', 'outline', 'link'] as const).map(
+                  variant => (
+                    <Button
+                      key={`${color}-${loading}-${variant}`}
+                      colorScheme={color}
+                      loading={loading}
+                      variant={variant}
+                    >
+                      {variant}
+                    </Button>
+                  ),
+                )}
+              </div>
+            )),
+          )}
         </div>
 
         <h1 className={'text-4xl'}>Tables</h1>
@@ -193,6 +190,11 @@ function App() {
               <FormCheckbox value={'oranges'}>Oranges</FormCheckbox>
               <FormCheckbox value={'other'}>Other</FormCheckbox>
             </FormCheckboxGroup>
+          </div>
+          <div>
+            <Switch checked={sw} onChange={setSw}>
+              Enable
+            </Switch>
           </div>
         </div>
       </div>

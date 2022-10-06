@@ -12,7 +12,7 @@ interface Props
 export default function FormInput({ className, ...props }: Props) {
   const formControl = useContext(FormControlContext);
 
-  const invalidStyle = formControl?.invalid ? 'border-red-400' : '';
+  const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
 
   return (
     <input
@@ -22,7 +22,7 @@ export default function FormInput({ className, ...props }: Props) {
       id={props.id || formControl?.id}
       className={twMerge(
         classNames(
-          'text-md rounded-md border border-gray-400 px-2 py-1',
+          'rounded-md border border-gray-300 px-2 py-1 text-sm shadow-sm',
           invalidStyle,
           className,
         ),

@@ -30,7 +30,12 @@ export default function FormCheckbox({
   }
 
   return (
-    <label htmlFor={id} className={'inline-flex items-center space-x-2'}>
+    <label
+      htmlFor={id}
+      className={
+        'inline-flex items-center space-x-2 text-sm font-medium text-gray-700'
+      }
+    >
       <input
         type="checkbox"
         {...props}

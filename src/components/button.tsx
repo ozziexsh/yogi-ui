@@ -7,13 +7,15 @@ interface Props
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  variant?: 'solid' | 'outline' | 'ghost' | 'link';
+  variant?: 'solid' | 'subtle' | 'outline' | 'ghost' | 'link';
   colorScheme?: string;
   loading?: boolean;
 }
 
 const variantMap = {
   solid: (color: string) => `bg-${color}-600 hover:bg-${color}-500 text-white`,
+  subtle: (color: string) =>
+    `bg-${color}-100 hover:bg-${color}-200 text-${color}-700`,
   outline: (color: string) =>
     `border-${color}-700 hover:bg-${color}-100 text-${color}-700`,
   ghost: (color: string) => `hover:bg-${color}-100 text-${color}-700`,
@@ -59,7 +61,7 @@ export default function Button({
       disabled={loading || props.disabled}
       className={twMerge(
         classNames(
-          'flex items-center space-x-2 rounded-md border-2 border-transparent px-4 py-2 font-semibold',
+          'flex items-center space-x-2 rounded-md border-2 border-transparent px-3 py-1 font-medium',
           variantMap[variant](colorScheme),
           'disabled:cursor-not-allowed disabled:opacity-75',
           className,

@@ -21,7 +21,7 @@ export default function FormSelect({ className, ...props }: Props) {
       id={props.id || formControl?.id}
       className={twMerge(
         classNames(
-          'text-md rounded-md border border-gray-400 bg-white px-2 py-2',
+          'rounded-md border border-gray-300 bg-white px-2 py-2 text-sm shadow-sm',
           invalidStyle,
           className,
         ),

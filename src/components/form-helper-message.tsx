@@ -1,4 +1,6 @@
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
+import classNames from 'classnames';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -8,7 +10,10 @@ interface Props
 
 export default function FormHelperMessage({ children, ...props }: Props) {
   return (
-    <p {...props} className={'text-sm font-light text-gray-500'}>
+    <p
+      {...props}
+      className={twMerge(classNames('text-sm text-gray-500', props.className))}
+    >
       {children}
     </p>
   );
