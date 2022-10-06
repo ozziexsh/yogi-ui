@@ -10,10 +10,13 @@ interface Props
   variant?: 'solid' | 'subtle' | 'outline' | 'ghost' | 'link';
   colorScheme?: string;
   loading?: boolean;
+  leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
 }
 
 const variantMap = {
-  solid: (color: string) => `bg-${color}-600 hover:bg-${color}-500 text-white`,
+  solid: (color: string) =>
+    `bg-${color}-600 hover:bg-${color}-500 text-white shadow-sm`,
   subtle: (color: string) =>
     `bg-${color}-100 hover:bg-${color}-200 text-${color}-700`,
   outline: (color: string) =>
@@ -49,27 +52,32 @@ function Spinner({ ...props }: React.SVGProps<SVGSVGElement>) {
 
 export default function Button({
   variant = 'solid',
-  colorScheme = 'neutral',
+  colorScheme = 'gray',
   className,
   loading,
   children,
+  leftIcon,
+  rightIcon,
   ...props
 }: Props) {
+  const loadOnRight = !!rightIcon;
+
   return (
     <button
       {...props}
       disabled={loading || props.disabled}
       className={twMerge(
         classNames(
-          'flex items-center space-x-2 rounded-md border-2 border-transparent px-3 py-1 font-medium',
+          'flex items-center space-x-2 rounded-md border-2 border-transparent px-3 py-2 text-sm font-medium leading-4',
           variantMap[variant](colorScheme),
           'disabled:cursor-not-allowed disabled:opacity-75',
           className,
         ),
       )}
     >
-      {loading ? <Spinner className={'h-3 w-3'} /> : null}
+      {loading && !loadOnRight ? <Spinner className={'h-3 w-3'} /> : leftIcon}
       <span>{children}</span>
+      {loading && loadOnRight ? <Spinner className={'h-3 w-3'} /> : rightIcon}
     </button>
   );
 }

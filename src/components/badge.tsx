@@ -7,18 +7,20 @@ interface Props
     React.HTMLAttributes<HTMLSpanElement>,
     HTMLSpanElement
   > {
-  variant?: 'default' | 'outline' | 'subtle';
+  variant?: 'solid' | 'outline' | 'subtle';
+  colorScheme?: string;
 }
 
 const variantMap = {
-  default: 'bg-gray-200',
-  outline: 'border-gray-400',
-  subtle: 'bg-gray-100',
+  solid: (color: string) => `bg-${color}-700 text-white shadow-sm`,
+  outline: (color: string) => `border-${color}-700 text-${color}-700`,
+  subtle: (color: string) => `bg-${color}-100 text-${color}-700`,
 };
 
 export default function Badge({
   children,
-  variant = 'default',
+  variant = 'solid',
+  colorScheme = 'gray',
   ...props
 }: Props) {
   return (
@@ -27,7 +29,7 @@ export default function Badge({
       className={twMerge(
         classNames(
           'rounded-md border border-transparent py-1 px-2 text-xs font-bold uppercase',
-          variantMap[variant],
+          variantMap[variant](colorScheme),
           props.className,
         ),
       )}
