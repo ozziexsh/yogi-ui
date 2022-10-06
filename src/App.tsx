@@ -27,6 +27,31 @@ function App() {
     'oranges',
   ]);
 
+  const colors = [
+    'slate',
+    'gray',
+    'zinc',
+    'neutral',
+    'stone',
+    'red',
+    'orange',
+    'amber',
+    'yellow',
+    'lime',
+    'green',
+    'emerald',
+    'teal',
+    'cyan',
+    'sky',
+    'blue',
+    'indigo',
+    'violet',
+    'purple',
+    'fuchsia',
+    'pink',
+    'rose',
+  ];
+
   return (
     <div className={'p-12'}>
       <div className="space-y-8">
@@ -52,12 +77,20 @@ function App() {
         <h1 className={'text-4xl'}>Buttons</h1>
 
         <div className="space-y-4">
-          <div className="flex items-center space-x-4">
-            <Button>Default</Button>
-            <Button variant={'outline'}>Outline</Button>
-            <Button variant={'ghost'}>Ghost</Button>
-            <Button variant={'link'}>Link</Button>
-          </div>
+          {colors.map(color => (
+            <div key={color} className="flex items-center space-x-4">
+              <Button colorScheme={color}>Default</Button>
+              <Button colorScheme={color} variant={'outline'}>
+                Outline
+              </Button>
+              <Button colorScheme={color} variant={'ghost'}>
+                Ghost
+              </Button>
+              <Button colorScheme={color} variant={'link'}>
+                Link
+              </Button>
+            </div>
+          ))}
           <div className="flex items-center space-x-4">
             <Button loading={true}>Default</Button>
             <Button loading={true} variant={'outline'}>

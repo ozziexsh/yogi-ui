@@ -7,16 +7,17 @@ interface Props
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  variant?: 'default' | 'outline' | 'ghost' | 'link';
-  colorScheme?: 'gray' | 'blue';
+  variant?: 'solid' | 'outline' | 'ghost' | 'link';
+  colorScheme?: string;
   loading?: boolean;
 }
 
 const variantMap = {
-  default: 'bg-gray-200 hover:bg-gray-300',
-  outline: 'border-gray-200 hover:bg-gray-100',
-  ghost: 'hover:bg-gray-100',
-  link: 'p-0 hover:underline',
+  solid: (color: string) => `bg-${color}-600 hover:bg-${color}-500 text-white`,
+  outline: (color: string) =>
+    `border-${color}-700 hover:bg-${color}-100 text-${color}-700`,
+  ghost: (color: string) => `hover:bg-${color}-100 text-${color}-700`,
+  link: (color: string) => `p-0 hover:underline text-${color}-700`,
 };
 
 function Spinner({ ...props }: React.SVGProps<SVGSVGElement>) {
@@ -45,7 +46,8 @@ function Spinner({ ...props }: React.SVGProps<SVGSVGElement>) {
 }
 
 export default function Button({
-  variant = 'default',
+  variant = 'solid',
+  colorScheme = 'neutral',
   className,
   loading,
   children,
@@ -57,8 +59,8 @@ export default function Button({
       disabled={loading || props.disabled}
       className={twMerge(
         classNames(
-          'flex items-center space-x-2 rounded-md border-2 border-transparent px-4 py-2',
-          variantMap[variant],
+          'flex items-center space-x-2 rounded-md border-2 border-transparent px-4 py-2 font-semibold',
+          variantMap[variant](colorScheme),
           'disabled:cursor-not-allowed disabled:opacity-75',
           className,
         ),

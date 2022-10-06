@@ -8,4 +8,17 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  safelist: [
+    {
+      pattern: /bg-(.*)-(100|500|600|700)$/,
+      variants: ['hover']
+    },
+    {
+      pattern: /border-(.*)-(700)$/,
+    },
+    {
+      pattern: /text-(.*)-(700)$/,
+      variants: ['hover']
+    },
+  ]
 }
