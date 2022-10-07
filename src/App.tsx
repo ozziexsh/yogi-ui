@@ -28,6 +28,7 @@ import Modal, {
   useModalToggle,
 } from './components/modal';
 import Alert from './components/alert';
+import Drawer, { DrawerBody, DrawerHeader } from './components/drawer';
 
 function AdjustmentIcon({ className }: { className: string }) {
   return (
@@ -58,6 +59,10 @@ function App() {
   const defaultModal = useModalToggle();
   const noHeaderModal = useModalToggle();
   const noFooterModal = useModalToggle();
+  const rightDrawer = useModalToggle();
+  const leftDrawer = useModalToggle();
+  const topDrawer = useModalToggle();
+  const bottomDrawer = useModalToggle();
 
   const colors = [
     'slate',
@@ -146,7 +151,7 @@ function App() {
             [false, true].flatMap(loading => (
               <div
                 key={`${color}-${loading}`}
-                className="flex items-center space-x-4"
+                className="flex flex-col items-start space-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:space-y-0 sm:space-x-4"
               >
                 {(['solid', 'subtle', 'ghost', 'outline', 'link'] as const).map(
                   variant => (
@@ -164,7 +169,7 @@ function App() {
             )),
           )}
 
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col items-start space-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:space-y-0 sm:space-x-4">
             <Button leftIcon={<AdjustmentIcon className={'h-4 w-4'} />}>
               Yaba daba do
             </Button>
@@ -189,7 +194,7 @@ function App() {
         <h1 className={'text-4xl'}>Modal</h1>
 
         <div>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-col items-start space-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:space-y-0 sm:space-x-4">
             <Button onClick={defaultModal.open}>Open modal</Button>
             <Button onClick={noHeaderModal.open}>Modal without header</Button>
             <Button onClick={noFooterModal.open}>Modal without footer</Button>
@@ -252,6 +257,131 @@ function App() {
               </p>
             </ModalBody>
           </Modal>
+        </div>
+
+        <h1 className={'text-4xl'}>Drawers</h1>
+
+        <div>
+          <div className="flex flex-col items-start space-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:space-y-0 sm:space-x-4">
+            <Button onClick={rightDrawer.open}>Open Right Drawer</Button>
+            <Button onClick={leftDrawer.open}>Open Left Drawer</Button>
+            <Button onClick={topDrawer.open}>Open Top Drawer</Button>
+            <Button onClick={bottomDrawer.open}>Open Bottom Drawer</Button>
+          </div>
+
+          <Drawer {...rightDrawer.props}>
+            <DrawerHeader>Right Drawer</DrawerHeader>
+            <DrawerBody>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                blanditiis consequatur culpa dolor ducimus eveniet iste, maxime
+                natus nemo nisi, non nulla numquam odio perspiciatis quo
+                similique sit totam voluptatem?
+              </p>
+            </DrawerBody>
+          </Drawer>
+          <Drawer {...leftDrawer.props} direction={'left'}>
+            <DrawerHeader>Left Drawer</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </Drawer>
+          <Drawer {...topDrawer.props} direction={'top'}>
+            <DrawerHeader>Top Drawer</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </Drawer>
+          <Drawer {...bottomDrawer.props} direction={'bottom'}>
+            <DrawerHeader>Bottom Drawer</DrawerHeader>
+            <DrawerBody>Content</DrawerBody>
+          </Drawer>
         </div>
 
         <h1 className={'text-4xl'}>Tables</h1>
