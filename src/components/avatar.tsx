@@ -1,7 +1,7 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { useYogiTheme } from '../theme';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props {
   className?: string;
@@ -21,8 +21,8 @@ export default function Avatar({
   const theme = useYogiTheme();
   const mergedClass = twMerge(
     classNames(
+      theme.components.avatar.className,
       `bg-${colorScheme || theme.colorScheme}-600`,
-      'text-white w-12 h-12 rounded-full inline-flex items-center justify-center',
       className,
     ),
   );

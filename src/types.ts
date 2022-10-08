@@ -9,3 +9,11 @@ export type DivProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 >;
+
+export type RecursivePartial<Obj> = {
+  [Prop in keyof Obj]?: Obj[Prop] extends (infer U)[]
+    ? RecursivePartial<U>[]
+    : Obj[Prop] extends object
+    ? RecursivePartial<Obj[Prop]>
+    : Obj[Prop];
+};

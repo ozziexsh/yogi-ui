@@ -2,7 +2,11 @@ import React, { useContext } from 'react';
 import { FormControlContext } from './form-control';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { useYogiTheme } from '../theme';
+import useYogiTheme from '../hooks/use-yogi-theme';
+
+export const labelTheme = {
+  className: 'text-sm font-medium text-gray-700',
+};
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -10,7 +14,7 @@ interface Props
     HTMLLabelElement
   > {}
 
-export default function FormLabel({ children, className, ...props }: Props) {
+export default function Label({ children, className, ...props }: Props) {
   const formControl = useContext(FormControlContext);
   const theme = useYogiTheme();
 
@@ -18,7 +22,9 @@ export default function FormLabel({ children, className, ...props }: Props) {
     <label
       {...props}
       htmlFor={props.htmlFor || formControl?.id}
-      className={twMerge(classNames(theme.formLabel, className))}
+      className={twMerge(
+        classNames(theme.components.label.className, className),
+      )}
     >
       <span className={'inline-block'}>{children}</span>
       {formControl?.required ? (

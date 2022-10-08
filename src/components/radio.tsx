@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useContext, useId } from 'react';
-import { FormRadioGroupContext } from './form-radio-group';
+import { RadioGroupContext } from './radio-group';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { useYogiTheme } from '../theme';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -12,12 +12,12 @@ interface Props
   colorScheme?: string;
 }
 
-export default function FormRadio({
+export default function Radio({
   children,
   colorScheme,
   ...props
 }: PropsWithChildren<Props>) {
-  const radioGroup = useContext(FormRadioGroupContext);
+  const radioGroup = useContext(RadioGroupContext);
   const fallbackId = useId();
   const theme = useYogiTheme();
   const id = props.id || fallbackId;
@@ -42,7 +42,7 @@ export default function FormRadio({
     <label
       htmlFor={id}
       className={twMerge(
-        classNames('inline-flex items-center space-x-2', theme.formLabel),
+        classNames(theme.components.radio.className, props.className),
       )}
     >
       <input

@@ -2,29 +2,27 @@ import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import { FormControlContext } from './form-control';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props
   extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLTextAreaElement>,
-    HTMLTextAreaElement
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
   > {}
 
-export default function FormTextarea({ className, ...props }: Props) {
+export default function Input({ className, ...props }: Props) {
+  const theme = useYogiTheme();
   const formControl = useContext(FormControlContext);
-
   const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
 
   return (
-    <textarea
+    <input
+      type="text"
       {...props}
       required={formControl?.required || props.required}
       id={props.id || formControl?.id}
       className={twMerge(
-        classNames(
-          'rounded-md border border-gray-300 px-2 py-1 text-sm shadow-sm',
-          invalidStyle,
-          className,
-        ),
+        classNames(theme.components.input.className, invalidStyle, className),
       )}
     />
   );

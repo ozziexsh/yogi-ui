@@ -1,34 +1,22 @@
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import React, { createElement } from 'react';
-import { IconType } from '../types';
-import { useYogiTheme } from '../theme';
+import React from 'react';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
-interface CommonProps
+export interface ButtonCommonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
   > {
-  variant?: 'solid' | 'subtle' | 'outline' | 'ghost' | 'link';
+  variant?: 'solid' | 'subtle' | 'outline' | 'ghost' | 'link' | string;
   colorScheme?: string;
   loading?: boolean;
 }
 
-interface Props extends CommonProps {
+interface Props extends ButtonCommonProps {
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
 }
-
-const variantMap = {
-  solid: (color: string) =>
-    `bg-${color}-600 hover:bg-${color}-500 text-white shadow-sm`,
-  subtle: (color: string) =>
-    `bg-${color}-100 hover:bg-${color}-200 text-${color}-700`,
-  outline: (color: string) =>
-    `border-${color}-700 hover:bg-${color}-100 text-${color}-700`,
-  ghost: (color: string) => `hover:bg-${color}-100 text-${color}-700`,
-  link: (color: string) => `p-0 hover:underline text-${color}-700`,
-};
 
 function Spinner({ ...props }: React.SVGProps<SVGSVGElement>) {
   return (
@@ -55,40 +43,8 @@ function Spinner({ ...props }: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-interface IconButtonProps extends CommonProps {
-  icon: IconType;
-}
-
-export function IconButton({
-  variant = 'solid',
-  colorScheme,
-  className,
-  loading,
-  icon,
-  ...props
-}: IconButtonProps) {
-  const theme = useYogiTheme();
-
-  return (
-    <button
-      {...props}
-      disabled={loading || props.disabled}
-      className={twMerge(
-        classNames(
-          'rounded-md border-2 border-transparent p-2 leading-4',
-          variantMap[variant](colorScheme || theme.colorScheme),
-          'disabled:cursor-not-allowed disabled:opacity-75',
-          className,
-        ),
-      )}
-    >
-      {createElement(icon, { className: 'w-4 h-4' })}
-    </button>
-  );
-}
-
 export default function Button({
-  variant = 'solid',
+  variant,
   colorScheme,
   className,
   loading,
@@ -99,18 +55,18 @@ export default function Button({
 }: Props) {
   const theme = useYogiTheme();
   const loadOnRight = !!rightIcon;
+  const buttonStyle = theme.components.button;
+  const resolvedVariant = variant || buttonStyle.defaultVariant;
+  const variantClassName = buttonStyle.variants[resolvedVariant](
+    colorScheme || theme.colorScheme,
+  );
 
   return (
     <button
       {...props}
       disabled={loading || props.disabled}
       className={twMerge(
-        classNames(
-          'flex items-center space-x-2 rounded-md border-2 border-transparent px-3 py-2 text-sm font-medium leading-4',
-          variantMap[variant](colorScheme || theme.colorScheme),
-          'disabled:cursor-not-allowed disabled:opacity-75',
-          className,
-        ),
+        classNames(buttonStyle.className, variantClassName, className),
       )}
     >
       {loading && !loadOnRight ? <Spinner className={'h-3 w-3'} /> : leftIcon}

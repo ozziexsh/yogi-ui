@@ -2,7 +2,7 @@ import { Switch as HSwitch } from '@headlessui/react';
 import { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
-import { useYogiTheme } from '../theme';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props {
   checked?: boolean;
@@ -35,7 +35,11 @@ export function SwitchLabel({
   const theme = useYogiTheme();
 
   return (
-    <HSwitch.Label className={twMerge(classNames(theme.formLabel, className))}>
+    <HSwitch.Label
+      className={twMerge(
+        classNames(theme.components.switchLabel.className, className),
+      )}
+    >
       {children}
     </HSwitch.Label>
   );

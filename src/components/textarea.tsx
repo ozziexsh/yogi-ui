@@ -5,18 +5,17 @@ import { FormControlContext } from './form-control';
 
 interface Props
   extends React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+    React.InputHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
   > {}
 
-export default function FormInput({ className, ...props }: Props) {
+export default function Textarea({ className, ...props }: Props) {
   const formControl = useContext(FormControlContext);
 
   const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
 
   return (
-    <input
-      type="text"
+    <textarea
       {...props}
       required={formControl?.required || props.required}
       id={props.id || formControl?.id}

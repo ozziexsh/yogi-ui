@@ -6,19 +6,14 @@ import InformationCircleIcon from '../icons/information-circle-icon';
 import ExclamationCircleIcon from '../icons/exclamation-circle-icon';
 import XCircleIcon from '../icons/x-circle-icon';
 import { createElement } from 'react';
-import colors from 'tailwindcss/colors';
-import { useYogiTheme } from '../theme';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props extends DivProps {
-  variant?: 'subtle';
+  variant?: 'subtle' | string;
   status?: 'success' | 'info' | 'warning' | 'error';
   colorScheme?: string;
   icon?: IconType;
 }
-
-const variantMap = {
-  subtle: (color: string) => `bg-${color}-200 text-${color}-700`,
-};
 
 const statusIconMap: { [key: string]: IconType } = {
   success: CheckCircleIcon,
@@ -35,7 +30,7 @@ const statusColorMap: { [key: string]: string } = {
 };
 
 export default function Alert({
-  variant = 'subtle',
+  variant,
   colorScheme,
   status,
   icon,
@@ -44,19 +39,19 @@ export default function Alert({
 }: Props) {
   const theme = useYogiTheme();
   const statusIcon = icon ? icon : status ? statusIconMap[status] : null;
+  const alertStyle = theme.components.alert;
   const resolvedColorScheme = status
     ? statusColorMap[status]
-    : colorScheme
-    ? colorScheme
-    : theme.colorScheme;
+    : colorScheme || theme.colorScheme;
+  const resolvedVariant = variant || alertStyle.defaultVariant;
 
   return (
     <div
       {...props}
       className={twMerge(
         classNames(
-          'flex items-start space-x-2 rounded-md border-4 border-transparent bg-red-200 px-4 py-2 text-gray-700',
-          variantMap[variant](resolvedColorScheme),
+          alertStyle.className,
+          alertStyle.variants[resolvedVariant](resolvedColorScheme),
         ),
       )}
     >

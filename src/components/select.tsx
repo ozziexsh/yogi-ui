@@ -9,7 +9,7 @@ interface Props
     HTMLSelectElement
   > {}
 
-export default function FormSelect({ className, ...props }: Props) {
+export default function Select({ className, ...props }: Props) {
   const formControl = useContext(FormControlContext);
 
   const invalidStyle = formControl?.invalid ? 'border-red-400' : '';

@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useContext, useId } from 'react';
-import { FormCheckboxGroupContext } from './form-checkbox-group';
+import { CheckboxGroupContext } from './checkbox-group';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import { useYogiTheme } from '../theme';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -12,12 +12,12 @@ interface Props
   colorScheme?: string;
 }
 
-export default function FormCheckbox({
+export default function Checkbox({
   children,
   colorScheme,
   ...props
 }: PropsWithChildren<Props>) {
-  const checkboxGroup = useContext(FormCheckboxGroupContext);
+  const checkboxGroup = useContext(CheckboxGroupContext);
   const fallbackId = useId();
   const theme = useYogiTheme();
   const id = props.id || fallbackId;
@@ -42,7 +42,7 @@ export default function FormCheckbox({
     <label
       htmlFor={id}
       className={twMerge(
-        classNames('inline-flex items-center space-x-2', theme.formLabel),
+        classNames(theme.components.checkbox.className, props.className),
       )}
     >
       <input

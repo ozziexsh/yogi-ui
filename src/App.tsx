@@ -1,17 +1,17 @@
 import Heading from './components/heading';
-import Button, { IconButton } from './components/button';
+import Button from './components/button';
 import FormControl from './components/form-control';
-import FormInput from './components/form-input';
-import FormLabel from './components/form-label';
+import Input from './components/input';
+import Label from './components/label';
 import FormHelperMessage from './components/form-helper-message';
 import FormErrorMessage from './components/form-error-message';
-import FormSelect from './components/form-select';
-import FormTextarea from './components/form-textarea';
-import FormRadio from './components/form-radio';
-import FormCheckbox from './components/form-checkbox';
-import FormRadioGroup from './components/form-radio-group';
-import { useState } from 'react';
-import FormCheckboxGroup from './components/form-checkbox-group';
+import Select from './components/select';
+import Textarea from './components/textarea';
+import Radio from './components/radio';
+import Checkbox from './components/checkbox';
+import RadioGroup from './components/radio-group';
+import React, { useState } from 'react';
+import CheckboxGroup from './components/checkbox-group';
 import Badge from './components/badge';
 import Table from './components/table';
 import Thead from './components/thead';
@@ -29,6 +29,7 @@ import Modal, {
 } from './components/modal';
 import Alert from './components/alert';
 import Drawer, { DrawerBody, DrawerHeader } from './components/drawer';
+import IconButton from './components/icon-button';
 
 function AdjustmentIcon({ className }: { className: string }) {
   return (
@@ -254,12 +255,12 @@ function App() {
             <ModalBody>
               <div className="space-y-4">
                 <FormControl>
-                  <FormLabel>Name</FormLabel>
-                  <FormInput />
+                  <Label>Name</Label>
+                  <Input />
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Email</FormLabel>
-                  <FormInput />
+                  <Label>Email</Label>
+                  <Input />
                 </FormControl>
               </div>
             </ModalBody>
@@ -464,64 +465,64 @@ function App() {
 
         <div className="space-y-4">
           <FormControl>
-            <FormLabel>Email</FormLabel>
-            <FormInput />
+            <Label>Email</Label>
+            <Input />
             <FormHelperMessage>
               Make sure to include an @ sign
             </FormHelperMessage>
           </FormControl>
           <FormControl invalid={true}>
-            <FormLabel>Password</FormLabel>
-            <FormInput />
+            <Label>Password</Label>
+            <Input />
             <FormErrorMessage>Must be at least 8 characters</FormErrorMessage>
           </FormControl>
           <FormControl required={true}>
-            <FormLabel>Serial Number</FormLabel>
-            <FormInput />
+            <Label>Serial Number</Label>
+            <Input />
           </FormControl>
           <FormControl>
-            <FormLabel>Country</FormLabel>
-            <FormSelect>
+            <Label>Country</Label>
+            <Select>
               <option value={'canada'}>Canada</option>
               <option value={'usa'}>USA</option>
               <option value={'zimbabwe'}>Zimbabwe</option>
-            </FormSelect>
+            </Select>
           </FormControl>
           <FormControl>
-            <FormLabel>Bio</FormLabel>
-            <FormTextarea />
+            <Label>Bio</Label>
+            <Textarea />
           </FormControl>
           <div className={'flex flex-col space-y-1'}>
-            <FormRadio>Apples</FormRadio>
-            <FormRadio>Oranges</FormRadio>
-            <FormRadio>Other</FormRadio>
+            <Radio>Apples</Radio>
+            <Radio>Oranges</Radio>
+            <Radio>Other</Radio>
           </div>
           <div className={'flex flex-col space-y-1'}>
-            <FormRadioGroup
+            <RadioGroup
               value={radioGroup}
               onChange={setRadioGroup}
               colorScheme={'teal'}
             >
-              <FormRadio value={'apples'}>Apples</FormRadio>
-              <FormRadio value={'oranges'}>Oranges</FormRadio>
-              <FormRadio value={'other'}>Other</FormRadio>
-            </FormRadioGroup>
+              <Radio value={'apples'}>Apples</Radio>
+              <Radio value={'oranges'}>Oranges</Radio>
+              <Radio value={'other'}>Other</Radio>
+            </RadioGroup>
           </div>
           <div className={'flex flex-col space-y-1'}>
-            <FormCheckbox>Apples</FormCheckbox>
-            <FormCheckbox>Oranges</FormCheckbox>
-            <FormCheckbox>Other</FormCheckbox>
+            <Checkbox>Apples</Checkbox>
+            <Checkbox>Oranges</Checkbox>
+            <Checkbox>Other</Checkbox>
           </div>
           <div className={'flex flex-col space-y-1'}>
-            <FormCheckboxGroup
+            <CheckboxGroup
               value={checkboxGroup}
               onChange={setCheckboxGroup}
               colorScheme={'indigo'}
             >
-              <FormCheckbox value={'apples'}>Apples</FormCheckbox>
-              <FormCheckbox value={'oranges'}>Oranges</FormCheckbox>
-              <FormCheckbox value={'other'}>Other</FormCheckbox>
-            </FormCheckboxGroup>
+              <Checkbox value={'apples'}>Apples</Checkbox>
+              <Checkbox value={'oranges'}>Oranges</Checkbox>
+              <Checkbox value={'other'}>Other</Checkbox>
+            </CheckboxGroup>
           </div>
           <div className={'space-y-4'}>
             <div>

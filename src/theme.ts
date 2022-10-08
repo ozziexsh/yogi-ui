@@ -1,18 +1,72 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
+import defaultTheme, { YogiTheme } from './default-theme';
+import { RecursivePartial } from './types';
+import deepMerge from './util/deep-merge';
 
-const defaultTheme = {
-  formLabel: 'text-sm font-medium text-gray-700',
-  colorScheme: 'indigo',
-};
-
-export const ThemeProvider = createContext({ theme: defaultTheme });
-
-export function useYogiTheme() {
-  const ctx = useContext(ThemeProvider);
-  if (!ctx) {
-    throw new Error('YogiContext not being provided');
-  }
-  return ctx.theme;
+export function extendTheme<T extends YogiTheme>(
+  baseTheme: T,
+  customTheme: RecursivePartial<T>,
+): YogiTheme {
+  return deepMerge(baseTheme, customTheme);
 }
 
-export default defaultTheme;
+// usecases:
+// adding variant to component
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     variants: {
+//       gradient: color => 'gradient-r-to-l ....',
+//     },
+//   },
+// });
+// // adding size to component
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     size: {
+//       huge: 'text-12xl',
+//     },
+//   },
+// });
+// // modifying variant
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     variants: {
+//       solid: color => defaultTheme.button.variants.solid(color) + ' xyz abc',
+//     },
+//   },
+// });
+// // modifying size
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     size: {
+//       lg: defaultTheme.button.sizes.lg + ' xyz abc',
+//     },
+//   },
+// });
+// // set default variant
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     variants: {
+//       default: 'solid',
+//     },
+//   },
+// });
+// // set default size
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     sizes: {
+//       default: 'lg',
+//     },
+//   },
+// });
+// // set default colorScheme
+// const customTheme = extendTheme(defaultTheme, {
+//   button: {
+//     colorScheme: 'red',
+//     variants: {
+//       default: 'solid',
+//     },
+//   },
+// });
+
+export const ThemeProvider = createContext({ theme: defaultTheme });
