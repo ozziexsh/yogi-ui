@@ -3,16 +3,19 @@ import React, { createContext, PropsWithChildren } from 'react';
 export const FormCheckboxGroupContext = createContext<null | {
   value: string[];
   onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+  colorScheme?: string;
 }>(null);
 
 interface Props {
   value: string[];
   onChange(value: string[]): void;
+  colorScheme?: string;
 }
 
 export default function FormCheckboxGroup({
   value,
   onChange,
+  colorScheme,
   children,
 }: PropsWithChildren<Props>) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -25,7 +28,7 @@ export default function FormCheckboxGroup({
 
   return (
     <FormCheckboxGroupContext.Provider
-      value={{ value, onChange: handleChange }}
+      value={{ value, onChange: handleChange, colorScheme }}
     >
       {children}
     </FormCheckboxGroupContext.Provider>

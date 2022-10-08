@@ -1,18 +1,28 @@
 import React from 'react';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
+import { useYogiTheme } from '../theme';
 
 interface Props {
   className?: string;
   src?: string;
   name?: string;
   alt?: string;
+  colorScheme?: string;
 }
 
-export default function Avatar({ src, alt, name, className }: Props) {
+export default function Avatar({
+  src,
+  alt,
+  name,
+  className,
+  colorScheme,
+}: Props) {
+  const theme = useYogiTheme();
   const mergedClass = twMerge(
     classNames(
-      'bg-blue-600 text-white w-12 h-12 rounded-full inline-flex items-center justify-center',
+      `bg-${colorScheme || theme.colorScheme}-600`,
+      'text-white w-12 h-12 rounded-full inline-flex items-center justify-center',
       className,
     ),
   );

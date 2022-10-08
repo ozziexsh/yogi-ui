@@ -1,5 +1,5 @@
 import Heading from './components/heading';
-import Button from './components/button';
+import Button, { IconButton } from './components/button';
 import FormControl from './components/form-control';
 import FormInput from './components/form-input';
 import FormLabel from './components/form-label';
@@ -36,7 +36,7 @@ function AdjustmentIcon({ className }: { className: string }) {
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
+      strokeWidth={1.5}
       stroke="currentColor"
       className={className}
     >
@@ -44,6 +44,25 @@ function AdjustmentIcon({ className }: { className: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5"
+      />
+    </svg>
+  );
+}
+
+function TrashIcon({ className }: { className: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className={className}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
       />
     </svg>
   );
@@ -130,17 +149,23 @@ function App() {
         <h1 className={'text-4xl'}>Alerts</h1>
 
         <div className={'space-y-4'}>
-          <Alert>
+          <Alert status={'info'}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit
           </Alert>
-          <Alert colorScheme={'green'}>
+          <Alert status={'success'}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit
           </Alert>
-          <Alert colorScheme={'yellow'}>
+          <Alert status={'warning'}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit
           </Alert>
-          <Alert colorScheme={'red'}>
+          <Alert status={'error'}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit
+          </Alert>
+          <Alert icon={TrashIcon}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
+            corporis ducimus eos, esse inventore iste minus non odio, odit
+            praesentium saepe, vitae voluptates. Asperiores commodi dolore eos
+            modi quae ullam!
           </Alert>
         </div>
 
@@ -191,6 +216,30 @@ function App() {
           </div>
         </div>
 
+        <div className="flex flex-col items-start space-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:space-y-0 sm:space-x-4">
+          <IconButton icon={TrashIcon} colorScheme={'indigo'} />
+          <IconButton
+            icon={TrashIcon}
+            variant={'subtle'}
+            colorScheme={'indigo'}
+          />
+          <IconButton
+            icon={TrashIcon}
+            variant={'ghost'}
+            colorScheme={'indigo'}
+          />
+          <IconButton
+            icon={TrashIcon}
+            variant={'outline'}
+            colorScheme={'indigo'}
+          />
+          <IconButton
+            icon={TrashIcon}
+            variant={'link'}
+            colorScheme={'indigo'}
+          />
+        </div>
+
         <h1 className={'text-4xl'}>Modal</h1>
 
         <div>
@@ -219,9 +268,7 @@ function App() {
                 <Button variant={'ghost'} onClick={defaultModal.close}>
                   Cancel
                 </Button>
-                <Button colorScheme={'blue'} onClick={defaultModal.close}>
-                  Create
-                </Button>
+                <Button onClick={defaultModal.close}>Create</Button>
               </div>
             </ModalFooter>
           </Modal>
@@ -240,9 +287,7 @@ function App() {
                 <Button variant={'ghost'} onClick={noHeaderModal.close}>
                   Cancel
                 </Button>
-                <Button colorScheme={'blue'} onClick={noHeaderModal.close}>
-                  Create
-                </Button>
+                <Button onClick={noHeaderModal.close}>Create</Button>
               </div>
             </ModalFooter>
           </Modal>
@@ -452,7 +497,11 @@ function App() {
             <FormRadio>Other</FormRadio>
           </div>
           <div className={'flex flex-col space-y-1'}>
-            <FormRadioGroup value={radioGroup} onChange={setRadioGroup}>
+            <FormRadioGroup
+              value={radioGroup}
+              onChange={setRadioGroup}
+              colorScheme={'teal'}
+            >
               <FormRadio value={'apples'}>Apples</FormRadio>
               <FormRadio value={'oranges'}>Oranges</FormRadio>
               <FormRadio value={'other'}>Other</FormRadio>
@@ -467,6 +516,7 @@ function App() {
             <FormCheckboxGroup
               value={checkboxGroup}
               onChange={setCheckboxGroup}
+              colorScheme={'indigo'}
             >
               <FormCheckbox value={'apples'}>Apples</FormCheckbox>
               <FormCheckbox value={'oranges'}>Oranges</FormCheckbox>

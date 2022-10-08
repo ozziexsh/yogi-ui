@@ -1,8 +1,10 @@
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
-import React from 'react';
+import React, { createElement } from 'react';
+import { IconType } from '../types';
+import { useYogiTheme } from '../theme';
 
-interface Props
+interface CommonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -10,6 +12,9 @@ interface Props
   variant?: 'solid' | 'subtle' | 'outline' | 'ghost' | 'link';
   colorScheme?: string;
   loading?: boolean;
+}
+
+interface Props extends CommonProps {
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
 }
@@ -50,9 +55,41 @@ function Spinner({ ...props }: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+interface IconButtonProps extends CommonProps {
+  icon: IconType;
+}
+
+export function IconButton({
+  variant = 'solid',
+  colorScheme,
+  className,
+  loading,
+  icon,
+  ...props
+}: IconButtonProps) {
+  const theme = useYogiTheme();
+
+  return (
+    <button
+      {...props}
+      disabled={loading || props.disabled}
+      className={twMerge(
+        classNames(
+          'rounded-md border-2 border-transparent p-2 leading-4',
+          variantMap[variant](colorScheme || theme.colorScheme),
+          'disabled:cursor-not-allowed disabled:opacity-75',
+          className,
+        ),
+      )}
+    >
+      {createElement(icon, { className: 'w-4 h-4' })}
+    </button>
+  );
+}
+
 export default function Button({
   variant = 'solid',
-  colorScheme = 'gray',
+  colorScheme,
   className,
   loading,
   children,
@@ -60,6 +97,7 @@ export default function Button({
   rightIcon,
   ...props
 }: Props) {
+  const theme = useYogiTheme();
   const loadOnRight = !!rightIcon;
 
   return (
@@ -69,7 +107,7 @@ export default function Button({
       className={twMerge(
         classNames(
           'flex items-center space-x-2 rounded-md border-2 border-transparent px-3 py-2 text-sm font-medium leading-4',
-          variantMap[variant](colorScheme),
+          variantMap[variant](colorScheme || theme.colorScheme),
           'disabled:cursor-not-allowed disabled:opacity-75',
           className,
         ),

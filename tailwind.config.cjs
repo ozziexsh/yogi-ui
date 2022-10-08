@@ -7,7 +7,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+      require('@tailwindcss/forms'),
+  ],
   safelist: [
     {
       pattern: /bg-(.*)-(100|200|500|600|700)$/,
@@ -17,7 +19,7 @@ module.exports = {
       pattern: /border-(.*)-(700)$/,
     },
     {
-      pattern: /text-(.*)-(700)$/,
+      pattern: /text-(.*)-(600|700)$/,
       variants: ['hover']
     },
   ]

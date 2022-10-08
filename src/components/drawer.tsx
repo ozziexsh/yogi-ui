@@ -116,10 +116,10 @@ export default function Drawer({
         <Dialog as="div" className="relative z-10" onClose={onClose}>
           <Transition.Child
             as={Fragment}
-            enter="ease-in-out duration-500"
+            enter="ease-in-out duration-250"
             enterFrom="opacity-0"
             enterTo="opacity-100"
-            leave="ease-in-out duration-500"
+            leave="ease-in-out duration-250"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
