@@ -30,6 +30,7 @@ import Modal, {
 import Alert from './components/alert';
 import Drawer, { DrawerBody, DrawerHeader } from './components/drawer';
 import IconButton from './components/icon-button';
+import Link from './components/link';
 
 function AdjustmentIcon({ className }: { className: string }) {
   return (
@@ -121,6 +122,18 @@ function App() {
           <Heading level={4}>Heading 4</Heading>
           <Heading level={5}>Heading 5</Heading>
           <Heading level={6}>Heading 6</Heading>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias
+            animi aperiam dolore eos facere labore magni nesciunt, nihil nostrum
+            odit optio perferendis quis reprehenderit sed tempora ullam?
+            Commodi, minus?
+          </p>
+
+          <p>
+            Lorem <Link href={'#'}>ipsum dolor sit</Link> amet, consectetur
+            adipisicing elit.
+          </p>
         </div>
 
         <h1 className={'text-4xl'}>Badges</h1>

@@ -22,6 +22,15 @@ const switchLabelTheme = {
   className: labelTheme.className,
 };
 
+const linkTheme = {
+  className: '',
+  defaultVariant: 'underline',
+  variants: {
+    underline: (color: string) =>
+      `underline text-${color}-700 hover:text-opacity-75`,
+  } as { [key: string]: (color: string) => string },
+};
+
 const buttonTheme = {
   className:
     'flex items-center space-x-2 rounded-md border-2 border-transparent px-3 py-2 text-sm font-medium leading-4 disabled:cursor-not-allowed disabled:opacity-75',
@@ -87,6 +96,7 @@ const defaultTheme = {
     label: labelTheme,
     radio: radioTheme,
     switchLabel: switchLabelTheme,
+    link: linkTheme,
   },
 };
 
