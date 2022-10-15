@@ -12,54 +12,55 @@ interface Props
   colorScheme?: string;
 }
 
-export default function Radio({
-  children,
-  colorScheme,
-  ...props
-}: PropsWithChildren<Props>) {
-  const radioGroup = useContext(RadioGroupContext);
-  const fallbackId = useId();
-  const theme = useYogiTheme();
-  const id = props.id || fallbackId;
-  const isChecked = (() => {
-    if (typeof props.checked !== 'undefined') {
-      return props.checked;
-    }
-    if (!radioGroup?.value) {
-      return undefined;
-    }
-    return radioGroup.value === props.value;
-  })();
-  const resolvedColorScheme =
-    colorScheme || radioGroup?.colorScheme || theme.colorScheme;
+const Radio = React.forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
+  ({ children, colorScheme, ...props }, ref) => {
+    const radioGroup = useContext(RadioGroupContext);
+    const fallbackId = useId();
+    const theme = useYogiTheme();
+    const id = props.id || fallbackId;
+    const isChecked = (() => {
+      if (typeof props.checked !== 'undefined') {
+        return props.checked;
+      }
+      if (!radioGroup?.value) {
+        return undefined;
+      }
+      return radioGroup.value === props.value;
+    })();
+    const resolvedColorScheme =
+      colorScheme || radioGroup?.colorScheme || theme.colorScheme;
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    radioGroup?.onChange(e);
-    props.onChange?.(e);
-  }
+    function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+      radioGroup?.onChange(e);
+      props.onChange?.(e);
+    }
 
-  return (
-    <label
-      htmlFor={id}
-      className={twMerge(
-        classNames(theme.components.radio.className, props.className),
-      )}
-    >
-      <input
-        type="radio"
-        {...props}
-        id={id}
-        checked={isChecked}
-        onChange={onChange}
+    return (
+      <label
+        htmlFor={id}
         className={twMerge(
-          classNames(
-            resolvedColorScheme ? `text-${resolvedColorScheme}-600` : null,
-            props.className,
-          ),
+          classNames(theme.components.radio.className, props.className),
         )}
-      />
+      >
+        <input
+          type="radio"
+          {...props}
+          ref={ref}
+          id={id}
+          checked={isChecked}
+          onChange={onChange}
+          className={twMerge(
+            classNames(
+              resolvedColorScheme ? `text-${resolvedColorScheme}-600` : null,
+              props.className,
+            ),
+          )}
+        />
 
-      <span>{children}</span>
-    </label>
-  );
-}
+        <span>{children}</span>
+      </label>
+    );
+  },
+);
+
+export default Radio;

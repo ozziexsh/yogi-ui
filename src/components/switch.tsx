@@ -1,5 +1,5 @@
 import { Switch as HSwitch } from '@headlessui/react';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import { twMerge } from 'tailwind-merge';
 import useYogiTheme from '../hooks/use-yogi-theme';
@@ -45,45 +45,45 @@ export function SwitchLabel({
   );
 }
 
-export default function Switch({
-  colorScheme,
-  checked,
-  onChange,
-  name,
-  value,
-  children,
-}: PropsWithChildren<Props>) {
-  const theme = useYogiTheme();
+const Switch = React.forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
+  ({ colorScheme, checked, onChange, name, value, children }, ref) => {
+    const theme = useYogiTheme();
 
-  const switchComponent = (
-    <HSwitch
-      checked={checked}
-      onChange={onChange}
-      className={classNames(
-        checked ? `bg-${colorScheme || theme.colorScheme}-600` : 'bg-gray-200',
-        'relative inline-flex h-6 w-11 items-center rounded-full',
-      )}
-      name={name}
-      value={value}
-    >
-      <span
+    const switchComponent = (
+      <HSwitch
+        ref={ref}
+        checked={checked}
+        onChange={onChange}
         className={classNames(
-          checked ? 'translate-x-6' : 'translate-x-1',
-          'inline-block h-4 w-4 transform rounded-full bg-white transition',
+          checked
+            ? `bg-${colorScheme || theme.colorScheme}-600`
+            : 'bg-gray-200',
+          'relative inline-flex h-6 w-11 items-center rounded-full',
         )}
-      />
-    </HSwitch>
-  );
+        name={name}
+        value={value}
+      >
+        <span
+          className={classNames(
+            checked ? 'translate-x-6' : 'translate-x-1',
+            'inline-block h-4 w-4 transform rounded-full bg-white transition',
+          )}
+        />
+      </HSwitch>
+    );
 
-  if (!children) {
-    return switchComponent;
-  }
+    if (!children) {
+      return switchComponent;
+    }
 
-  return (
-    <SwitchGroup>
-      {switchComponent}
+    return (
+      <SwitchGroup>
+        {switchComponent}
 
-      <SwitchLabel>{children}</SwitchLabel>
-    </SwitchGroup>
-  );
-}
+        <SwitchLabel>{children}</SwitchLabel>
+      </SwitchGroup>
+    );
+  },
+);
+
+export default Switch;

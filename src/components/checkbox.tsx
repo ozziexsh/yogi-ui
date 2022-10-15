@@ -12,54 +12,55 @@ interface Props
   colorScheme?: string;
 }
 
-export default function Checkbox({
-  children,
-  colorScheme,
-  ...props
-}: PropsWithChildren<Props>) {
-  const checkboxGroup = useContext(CheckboxGroupContext);
-  const fallbackId = useId();
-  const theme = useYogiTheme();
-  const id = props.id || fallbackId;
-  const isChecked = (() => {
-    if (typeof props.checked !== 'undefined') {
-      return props.checked;
-    }
-    if (!checkboxGroup?.value || !props.value) {
-      return undefined;
-    }
-    return checkboxGroup.value.includes(String(props.value));
-  })();
-  const resolvedColorScheme =
-    colorScheme || checkboxGroup?.colorScheme || theme.colorScheme;
+const Checkbox = React.forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
+  ({ children, colorScheme, ...props }, ref) => {
+    const checkboxGroup = useContext(CheckboxGroupContext);
+    const fallbackId = useId();
+    const theme = useYogiTheme();
+    const id = props.id || fallbackId;
+    const isChecked = (() => {
+      if (typeof props.checked !== 'undefined') {
+        return props.checked;
+      }
+      if (!checkboxGroup?.value || !props.value) {
+        return undefined;
+      }
+      return checkboxGroup.value.includes(String(props.value));
+    })();
+    const resolvedColorScheme =
+      colorScheme || checkboxGroup?.colorScheme || theme.colorScheme;
 
-  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
-    checkboxGroup?.onChange(e);
-    props.onChange?.(e);
-  }
+    function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+      checkboxGroup?.onChange(e);
+      props.onChange?.(e);
+    }
 
-  return (
-    <label
-      htmlFor={id}
-      className={twMerge(
-        classNames(theme.components.checkbox.className, props.className),
-      )}
-    >
-      <input
-        type="checkbox"
-        {...props}
-        id={id}
-        checked={isChecked}
-        onChange={onChange}
+    return (
+      <label
+        htmlFor={id}
         className={twMerge(
-          classNames(
-            resolvedColorScheme ? `text-${resolvedColorScheme}-600` : null,
-            props.className,
-          ),
+          classNames(theme.components.checkbox.className, props.className),
         )}
-      />
+      >
+        <input
+          type="checkbox"
+          {...props}
+          ref={ref}
+          id={id}
+          checked={isChecked}
+          onChange={onChange}
+          className={twMerge(
+            classNames(
+              resolvedColorScheme ? `text-${resolvedColorScheme}-600` : null,
+              props.className,
+            ),
+          )}
+        />
 
-      <span>{children}</span>
-    </label>
-  );
-}
+        <span>{children}</span>
+      </label>
+    );
+  },
+);
+
+export default Checkbox;

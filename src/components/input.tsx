@@ -10,20 +10,25 @@ interface Props
     HTMLInputElement
   > {}
 
-export default function Input({ className, ...props }: Props) {
-  const theme = useYogiTheme();
-  const formControl = useContext(FormControlContext);
-  const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
+const Input = React.forwardRef<HTMLInputElement, Props>(
+  ({ className, ...props }, ref) => {
+    const theme = useYogiTheme();
+    const formControl = useContext(FormControlContext);
+    const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
 
-  return (
-    <input
-      type="text"
-      {...props}
-      required={formControl?.required || props.required}
-      id={props.id || formControl?.id}
-      className={twMerge(
-        classNames(theme.components.input.className, invalidStyle, className),
-      )}
-    />
-  );
-}
+    return (
+      <input
+        type="text"
+        {...props}
+        ref={ref}
+        required={formControl?.required || props.required}
+        id={props.id || formControl?.id}
+        className={twMerge(
+          classNames(theme.components.input.className, invalidStyle, className),
+        )}
+      />
+    );
+  },
+);
+
+export default Input;

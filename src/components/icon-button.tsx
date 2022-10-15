@@ -1,4 +1,8 @@
-import { IconType } from '../types';
+import {
+  IconType,
+  PolymorphicComponentPropWithRef,
+  PolymorphicRef,
+} from '../types';
 import useYogiTheme from '../hooks/use-yogi-theme';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
@@ -9,33 +13,52 @@ interface IconButtonProps extends ButtonCommonProps {
   icon: IconType;
 }
 
-export default function IconButton({
-  variant,
-  colorScheme,
-  className,
-  loading,
-  icon,
-  ...props
-}: IconButtonProps) {
-  const theme = useYogiTheme();
-  const buttonStyle = theme.components.iconButton;
-  const resolvedVariant = variant || buttonStyle.defaultVariant;
+type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropWithRef<
+  C,
+  IconButtonProps
+>;
 
-  return (
-    <button
-      {...props}
-      disabled={loading || props.disabled}
-      className={twMerge(
-        classNames(
-          buttonStyle.className,
-          buttonStyle.variants[resolvedVariant](
-            colorScheme || theme.colorScheme,
+type ButtonComponent = <C extends React.ElementType = 'button'>(
+  props: ButtonProps<C>,
+) => React.ReactElement | null;
+
+const IconButton: ButtonComponent = React.forwardRef(
+  <C extends React.ElementType = 'button'>(
+    {
+      variant,
+      colorScheme,
+      className,
+      loading,
+      icon,
+      as,
+      ...props
+    }: ButtonProps<C>,
+    ref?: PolymorphicRef<C>,
+  ) => {
+    const Component = as || 'button';
+    const theme = useYogiTheme();
+    const buttonStyle = theme.components.iconButton;
+    const resolvedVariant = variant || buttonStyle.defaultVariant;
+
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        disabled={loading || props.disabled}
+        className={twMerge(
+          classNames(
+            buttonStyle.className,
+            buttonStyle.variants[resolvedVariant](
+              colorScheme || theme.colorScheme,
+            ),
+            className,
           ),
-          className,
-        ),
-      )}
-    >
-      {createElement(icon, { className: 'w-4 h-4' })}
-    </button>
-  );
-}
+        )}
+      >
+        {createElement(icon, { className: 'w-4 h-4' })}
+      </Component>
+    );
+  },
+);
+
+export default IconButton;

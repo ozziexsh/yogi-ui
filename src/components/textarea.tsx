@@ -9,23 +9,27 @@ interface Props
     HTMLTextAreaElement
   > {}
 
-export default function Textarea({ className, ...props }: Props) {
-  const formControl = useContext(FormControlContext);
+const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(
+  ({ className, ...props }, ref) => {
+    const formControl = useContext(FormControlContext);
 
-  const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
+    const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
 
-  return (
-    <textarea
-      {...props}
-      required={formControl?.required || props.required}
-      id={props.id || formControl?.id}
-      className={twMerge(
-        classNames(
-          'rounded-md border border-gray-300 px-2 py-1 text-sm shadow-sm',
-          invalidStyle,
-          className,
-        ),
-      )}
-    />
-  );
-}
+    return (
+      <textarea
+        {...props}
+        required={formControl?.required || props.required}
+        id={props.id || formControl?.id}
+        className={twMerge(
+          classNames(
+            'rounded-md border border-gray-300 px-2 py-1 text-sm shadow-sm',
+            invalidStyle,
+            className,
+          ),
+        )}
+      />
+    );
+  },
+);
+
+export default Textarea;

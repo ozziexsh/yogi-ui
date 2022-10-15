@@ -6,7 +6,7 @@ import useYogiTheme from '../hooks/use-yogi-theme';
 
 type LinkProps<C extends React.ElementType> = PolymorphicComponentPropWithRef<
   C,
-  { variant?: 'underline' | string; colorScheme?: string }
+  { variant?: 'underline' | string; colorScheme?: string; className?: string }
 >;
 
 type LinkComponent = <C extends React.ElementType = 'a'>(
