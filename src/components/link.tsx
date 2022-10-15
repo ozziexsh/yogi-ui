@@ -20,9 +20,13 @@ const Link: LinkComponent = React.forwardRef(
   ) => {
     const Component = as || 'a';
     const theme = useYogiTheme();
-    const variant = props.variant || theme.components.link.defaultVariant;
-    const colorScheme = props.colorScheme || theme.colorScheme;
-    const className = theme.components.link.variants[variant](colorScheme);
+    const variant = props.variant || theme.components.Link.defaultVariant;
+    const colorScheme =
+      props.colorScheme ||
+      theme.components.Link.colorScheme ||
+      theme.colorScheme;
+    const className =
+      variant && theme.components.Link.variants?.[variant]?.(colorScheme);
 
     return (
       <Component

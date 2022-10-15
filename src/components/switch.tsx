@@ -37,7 +37,7 @@ export function SwitchLabel({
   return (
     <HSwitch.Label
       className={twMerge(
-        classNames(theme.components.switchLabel.className, className),
+        classNames(theme.components.SwitchLabel.className, className),
       )}
     >
       {children}
@@ -56,7 +56,11 @@ const Switch = React.forwardRef<HTMLButtonElement, PropsWithChildren<Props>>(
         onChange={onChange}
         className={classNames(
           checked
-            ? `bg-${colorScheme || theme.colorScheme}-600`
+            ? `bg-${
+                colorScheme ||
+                theme.components.Switch.colorScheme ||
+                theme.colorScheme
+              }-600`
             : 'bg-gray-200',
           'relative inline-flex h-6 w-11 items-center rounded-full',
         )}

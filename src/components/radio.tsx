@@ -28,7 +28,10 @@ const Radio = React.forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
       return radioGroup.value === props.value;
     })();
     const resolvedColorScheme =
-      colorScheme || radioGroup?.colorScheme || theme.colorScheme;
+      colorScheme ||
+      radioGroup?.colorScheme ||
+      theme.components.Radio.colorScheme ||
+      theme.colorScheme;
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
       radioGroup?.onChange(e);
@@ -39,7 +42,7 @@ const Radio = React.forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
       <label
         htmlFor={id}
         className={twMerge(
-          classNames(theme.components.radio.className, props.className),
+          classNames(theme.components.Radio.className, props.className),
         )}
       >
         <input

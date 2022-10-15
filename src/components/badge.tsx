@@ -19,7 +19,7 @@ export default function Badge({
   ...props
 }: Props) {
   const theme = useYogiTheme();
-  const badgeStyle = theme.components.badge;
+  const badgeStyle = theme.components.Badge;
   const resolvedVariant = variant || badgeStyle.defaultVariant;
 
   return (
@@ -28,9 +28,10 @@ export default function Badge({
       className={twMerge(
         classNames(
           badgeStyle.className,
-          badgeStyle.variants[resolvedVariant](
-            colorScheme || theme.colorScheme,
-          ),
+          resolvedVariant &&
+            badgeStyle.variants?.[resolvedVariant]?.(
+              colorScheme || badgeStyle.colorScheme || theme.colorScheme,
+            ),
           props.className,
         ),
       )}

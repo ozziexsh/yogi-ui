@@ -23,7 +23,7 @@ export default function Label({ children, className, ...props }: Props) {
       {...props}
       htmlFor={props.htmlFor || formControl?.id}
       className={twMerge(
-        classNames(theme.components.label.className, className),
+        classNames(theme.components.Label.className, className),
       )}
     >
       <span className={'inline-block'}>{children}</span>

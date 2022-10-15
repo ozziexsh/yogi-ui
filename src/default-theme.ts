@@ -83,23 +83,49 @@ const badgeTheme = {
   } as { [key: string]: (color: string) => string },
 };
 
-const defaultTheme = {
+interface ComponentTheme {
+  className?: string;
+  defaultVariant?: string;
+  colorScheme?: string;
+  variants?: {
+    [variant: string]: (color: string) => string;
+  };
+}
+
+export interface YogiTheme {
+  colorScheme: string;
+  components: {
+    Alert: ComponentTheme;
+    Avatar: ComponentTheme;
+    Badge: ComponentTheme;
+    Button: ComponentTheme;
+    Checkbox: ComponentTheme;
+    IconButton: ComponentTheme;
+    Input: ComponentTheme;
+    Label: ComponentTheme;
+    Radio: ComponentTheme;
+    Switch: ComponentTheme;
+    SwitchLabel: ComponentTheme;
+    Link: ComponentTheme;
+  };
+}
+
+const defaultTheme: YogiTheme = {
   colorScheme: 'indigo',
   components: {
-    alert: alertTheme,
-    avatar: avatarTheme,
-    badge: badgeTheme,
-    button: buttonTheme,
-    checkbox: checkboxTheme,
-    iconButton: iconButtonTheme,
-    input: inputTheme,
-    label: labelTheme,
-    radio: radioTheme,
-    switchLabel: switchLabelTheme,
-    link: linkTheme,
+    Alert: alertTheme,
+    Avatar: avatarTheme,
+    Badge: badgeTheme,
+    Button: buttonTheme,
+    Checkbox: checkboxTheme,
+    IconButton: iconButtonTheme,
+    Input: inputTheme,
+    Label: labelTheme,
+    Radio: radioTheme,
+    Switch: {},
+    SwitchLabel: switchLabelTheme,
+    Link: linkTheme,
   },
 };
-
-export type YogiTheme = typeof defaultTheme;
 
 export default defaultTheme;

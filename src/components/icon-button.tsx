@@ -37,7 +37,7 @@ const IconButton: ButtonComponent = React.forwardRef(
   ) => {
     const Component = as || 'button';
     const theme = useYogiTheme();
-    const buttonStyle = theme.components.iconButton;
+    const buttonStyle = theme.components.IconButton;
     const resolvedVariant = variant || buttonStyle.defaultVariant;
 
     return (
@@ -48,9 +48,10 @@ const IconButton: ButtonComponent = React.forwardRef(
         className={twMerge(
           classNames(
             buttonStyle.className,
-            buttonStyle.variants[resolvedVariant](
-              colorScheme || theme.colorScheme,
-            ),
+            resolvedVariant &&
+              buttonStyle.variants?.[resolvedVariant]?.(
+                colorScheme || buttonStyle.colorScheme || theme.colorScheme,
+              ),
             className,
           ),
         )}

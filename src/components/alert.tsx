@@ -39,10 +39,10 @@ export default function Alert({
 }: Props) {
   const theme = useYogiTheme();
   const statusIcon = icon ? icon : status ? statusIconMap[status] : null;
-  const alertStyle = theme.components.alert;
+  const alertStyle = theme.components.Alert;
   const resolvedColorScheme = status
     ? statusColorMap[status]
-    : colorScheme || theme.colorScheme;
+    : colorScheme || alertStyle.colorScheme || theme.colorScheme;
   const resolvedVariant = variant || alertStyle.defaultVariant;
 
   return (
@@ -51,7 +51,8 @@ export default function Alert({
       className={twMerge(
         classNames(
           alertStyle.className,
-          alertStyle.variants[resolvedVariant](resolvedColorScheme),
+          resolvedVariant &&
+            alertStyle.variants?.[resolvedVariant]?.(resolvedColorScheme),
         ),
       )}
     >

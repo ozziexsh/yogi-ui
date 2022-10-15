@@ -28,7 +28,10 @@ const Checkbox = React.forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
       return checkboxGroup.value.includes(String(props.value));
     })();
     const resolvedColorScheme =
-      colorScheme || checkboxGroup?.colorScheme || theme.colorScheme;
+      colorScheme ||
+      checkboxGroup?.colorScheme ||
+      theme.components.Checkbox.colorScheme ||
+      theme.colorScheme;
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
       checkboxGroup?.onChange(e);
@@ -39,7 +42,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, PropsWithChildren<Props>>(
       <label
         htmlFor={id}
         className={twMerge(
-          classNames(theme.components.checkbox.className, props.className),
+          classNames(theme.components.Checkbox.className, props.className),
         )}
       >
         <input

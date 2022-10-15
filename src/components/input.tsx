@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
         required={formControl?.required || props.required}
         id={props.id || formControl?.id}
         className={twMerge(
-          classNames(theme.components.input.className, invalidStyle, className),
+          classNames(theme.components.Input.className, invalidStyle, className),
         )}
       />
     );

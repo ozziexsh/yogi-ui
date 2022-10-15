@@ -21,8 +21,10 @@ export default function Avatar({
   const theme = useYogiTheme();
   const mergedClass = twMerge(
     classNames(
-      theme.components.avatar.className,
-      `bg-${colorScheme || theme.colorScheme}-600`,
+      theme.components.Avatar.className,
+      `bg-${
+        colorScheme || theme.components.Avatar.colorScheme || theme.colorScheme
+      }-600`,
       className,
     ),
   );

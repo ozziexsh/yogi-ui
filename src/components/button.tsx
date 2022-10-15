@@ -47,11 +47,13 @@ const Button: ButtonComponent = React.forwardRef(
     const Component = as || 'button';
     const theme = useYogiTheme();
     const loadOnRight = !!rightIcon;
-    const buttonStyle = theme.components.button;
+    const buttonStyle = theme.components.Button;
     const resolvedVariant = variant || buttonStyle.defaultVariant;
-    const variantClassName = buttonStyle.variants[resolvedVariant](
-      colorScheme || theme.colorScheme,
-    );
+    const variantClassName =
+      resolvedVariant &&
+      buttonStyle.variants?.[resolvedVariant]?.(
+        colorScheme || buttonStyle.colorScheme || theme.colorScheme,
+      );
 
     return (
       <Component
