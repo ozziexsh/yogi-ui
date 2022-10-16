@@ -2,6 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 import React, { useContext } from 'react';
 import { FormControlContext } from './form-control';
+import useYogiTheme from '../hooks/use-yogi-theme';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -12,6 +13,7 @@ interface Props
 const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(
   ({ className, ...props }, ref) => {
     const formControl = useContext(FormControlContext);
+    const theme = useYogiTheme();
 
     const invalidStyle = formControl?.invalid ? 'border-red-500' : '';
 
@@ -23,7 +25,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(
         id={props.id || formControl?.id}
         className={twMerge(
           classNames(
-            'rounded-md border border-gray-300 px-2 py-1 text-sm shadow-sm',
+            theme.components.Input.className,
             invalidStyle,
             className,
           ),
