@@ -3,6 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/yogi-ui.umd.cjs",
+  "module": "./dist/yogi-ui.js",
+  "exports": {
+    ".": {
+      "import": "./dist/yogi-ui.js",
+      "require": "./dist/yogi-ui.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

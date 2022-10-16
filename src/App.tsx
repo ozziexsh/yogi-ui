@@ -155,9 +155,18 @@ function App() {
         <h1 className={'text-4xl'}>Avatars</h1>
 
         <div className={'flex items-center space-x-4'}>
-          <Avatar />
+          <Avatar size={'sm'} />
           <Avatar name={'Ozzie Neher'} />
-          <Avatar name={'Ozzie Neher'} src={'https://i.pravatar.cc/100'} />
+          <Avatar
+            size={'lg'}
+            name={'Ozzie Neher'}
+            src={'https://i.pravatar.cc/100'}
+          />
+          <Avatar
+            size={'xl'}
+            name={'Ozzie Neher'}
+            src={'https://i.pravatar.cc/100'}
+          />
         </div>
 
         <h1 className={'text-4xl'}>Alerts</h1>

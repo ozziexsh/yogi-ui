@@ -38,7 +38,7 @@ const IconButton: ButtonComponent = React.forwardRef(
     const Component = as || 'button';
     const theme = useYogiTheme();
     const buttonStyle = theme.components.IconButton;
-    const resolvedVariant = variant || buttonStyle.defaultVariant;
+    const resolvedVariant = variant || buttonStyle.variant;
 
     return (
       <Component

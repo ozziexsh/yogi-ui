@@ -43,7 +43,7 @@ export default function Alert({
   const resolvedColorScheme = status
     ? statusColorMap[status]
     : colorScheme || alertStyle.colorScheme || theme.colorScheme;
-  const resolvedVariant = variant || alertStyle.defaultVariant;
+  const resolvedVariant = variant || alertStyle.variant;
 
   return (
     <div

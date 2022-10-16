@@ -20,7 +20,7 @@ export default function Badge({
 }: Props) {
   const theme = useYogiTheme();
   const badgeStyle = theme.components.Badge;
-  const resolvedVariant = variant || badgeStyle.defaultVariant;
+  const resolvedVariant = variant || badgeStyle.variant;
 
   return (
     <span

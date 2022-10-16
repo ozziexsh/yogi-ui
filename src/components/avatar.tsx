@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import classNames from 'classnames';
 import useYogiTheme from '../hooks/use-yogi-theme';
@@ -9,6 +9,7 @@ interface Props {
   name?: string;
   alt?: string;
   colorScheme?: string;
+  size?: string;
 }
 
 export default function Avatar({
@@ -17,14 +18,18 @@ export default function Avatar({
   name,
   className,
   colorScheme,
+  size,
 }: Props) {
+  const [loaded, setLoaded] = useState(false);
   const theme = useYogiTheme();
+  const avatarStyle = theme.components.Avatar;
+  const resolvedSize = size || avatarStyle.size;
+  const sizeClass = resolvedSize && avatarStyle.sizes?.[resolvedSize]?.();
   const mergedClass = twMerge(
     classNames(
       theme.components.Avatar.className,
-      `bg-${
-        colorScheme || theme.components.Avatar.colorScheme || theme.colorScheme
-      }-600`,
+      `bg-${colorScheme || avatarStyle.colorScheme || theme.colorScheme}-600`,
+      sizeClass,
       className,
     ),
   );
@@ -33,7 +38,16 @@ export default function Avatar({
     .map(part => part[0])
     .join('');
 
-  if (!src) {
+  useEffect(() => {
+    setLoaded(false);
+    const image = new Image();
+    image.onload = () => setLoaded(true);
+    if (src) {
+      image.src = src;
+    }
+  }, [src]);
+
+  if (!src || !loaded) {
     return (
       <div className={mergedClass}>
         {initials ? (

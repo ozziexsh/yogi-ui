@@ -48,7 +48,7 @@ const Button: ButtonComponent = React.forwardRef(
     const theme = useYogiTheme();
     const loadOnRight = !!rightIcon;
     const buttonStyle = theme.components.Button;
-    const resolvedVariant = variant || buttonStyle.defaultVariant;
+    const resolvedVariant = variant || buttonStyle.variant;
     const variantClassName =
       resolvedVariant &&
       buttonStyle.variants?.[resolvedVariant]?.(

@@ -18,6 +18,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(
     return (
       <textarea
         {...props}
+        ref={ref}
         required={formControl?.required || props.required}
         id={props.id || formControl?.id}
         className={twMerge(
