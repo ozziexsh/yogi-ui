@@ -1,4 +1,6 @@
 import React, { createContext, useId } from 'react';
+import { twMerge } from 'tailwind-merge';
+import classNames from 'classnames';
 
 interface Props
   extends React.DetailedHTMLProps<
@@ -25,7 +27,12 @@ export default function FormControl({
 
   return (
     <FormControlContext.Provider value={{ invalid, required, id }}>
-      <div className={'flex flex-col space-y-1'} {...props}>
+      <div
+        {...props}
+        className={twMerge(
+          classNames('flex flex-col space-y-1', props.className),
+        )}
+      >
         {children}
       </div>
     </FormControlContext.Provider>

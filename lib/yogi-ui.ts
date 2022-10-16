@@ -1,6 +1,7 @@
 export { default as Alert } from './components/alert';
 export { default as Avatar } from './components/avatar';
 export { default as Badge } from './components/badge';
+export { default as Button } from './components/button';
 export { default as Checkbox } from './components/checkbox';
 export { default as CheckboxGroup } from './components/checkbox-group';
 export { default as Drawer } from './components/drawer';

@@ -1,10 +1,17 @@
 import { ThemeProvider } from '../theme';
 import { PropsWithChildren } from 'react';
-import defaultTheme from '../default-theme';
+import defaultTheme, { YogiTheme } from '../default-theme';
 
-export default function YogiProvider({ children }: PropsWithChildren) {
+interface Props {
+  theme?: YogiTheme;
+}
+
+export default function YogiProvider({
+  children,
+  theme,
+}: PropsWithChildren<Props>) {
   return (
-    <ThemeProvider.Provider value={{ theme: defaultTheme }}>
+    <ThemeProvider.Provider value={{ theme: theme || defaultTheme }}>
       {children}
     </ThemeProvider.Provider>
   );
