@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: './src/yogi-ui.ts',
+      entry: './lib/yogi-ui.ts',
       name: 'YogiUI',
       fileName: 'yogi-ui',
     },

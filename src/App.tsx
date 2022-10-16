@@ -1,36 +1,36 @@
-import Heading from './components/heading';
-import Button from './components/button';
-import FormControl from './components/form-control';
-import Input from './components/input';
-import Label from './components/label';
-import FormHelperMessage from './components/form-helper-message';
-import FormErrorMessage from './components/form-error-message';
-import Select from './components/select';
-import Textarea from './components/textarea';
-import Radio from './components/radio';
-import Checkbox from './components/checkbox';
-import RadioGroup from './components/radio-group';
+import Heading from '../lib/components/heading';
+import Button from '../lib/components/button';
+import FormControl from '../lib/components/form-control';
+import Input from '../lib/components/input';
+import Label from '../lib/components/label';
+import FormHelperMessage from '../lib/components/form-helper-message';
+import FormErrorMessage from '../lib/components/form-error-message';
+import Select from '../lib/components/select';
+import Textarea from '../lib/components/textarea';
+import Radio from '../lib/components/radio';
+import Checkbox from '../lib/components/checkbox';
+import RadioGroup from '../lib/components/radio-group';
 import React, { useState } from 'react';
-import CheckboxGroup from './components/checkbox-group';
-import Badge from './components/badge';
-import Table from './components/table';
-import Thead from './components/thead';
-import Tr from './components/tr';
-import Th from './components/th';
-import Tbody from './components/tbody';
-import Td from './components/td';
-import Switch, { SwitchGroup, SwitchLabel } from './components/switch';
-import Avatar from './components/avatar';
+import CheckboxGroup from '../lib/components/checkbox-group';
+import Badge from '../lib/components/badge';
+import Table from '../lib/components/table';
+import Thead from '../lib/components/thead';
+import Tr from '../lib/components/tr';
+import Th from '../lib/components/th';
+import Tbody from '../lib/components/tbody';
+import Td from '../lib/components/td';
+import Switch, { SwitchGroup, SwitchLabel } from '../lib/components/switch';
+import Avatar from '../lib/components/avatar';
 import Modal, {
   ModalBody,
   ModalFooter,
   ModalHeader,
   useModalToggle,
-} from './components/modal';
-import Alert from './components/alert';
-import Drawer, { DrawerBody, DrawerHeader } from './components/drawer';
-import IconButton from './components/icon-button';
-import Link from './components/link';
+} from '../lib/components/modal';
+import Alert from '../lib/components/alert';
+import Drawer, { DrawerBody, DrawerHeader } from '../lib/components/drawer';
+import IconButton from '../lib/components/icon-button';
+import Link from '../lib/components/link';
 
 function AdjustmentIcon({ className }: { className: string }) {
   return (
