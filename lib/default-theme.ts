@@ -121,7 +121,7 @@ const badgeTheme: ComponentTheme = {
 };
 
 const defaultTheme: YogiTheme = {
-  colorScheme: 'indigo',
+  colorScheme: 'blue',
   components: {
     Alert: alertTheme,
     Avatar: avatarTheme,

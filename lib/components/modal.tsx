@@ -83,7 +83,7 @@ export default function Modal({
   children,
 }: PropsWithChildren<Props>) {
   // todo: ssr?
-  if (typeof window === 'undefined') {
+  if (typeof document === 'undefined') {
     return null;
   }
 

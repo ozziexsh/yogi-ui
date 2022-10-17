@@ -15,7 +15,7 @@ export default defineConfig({
       name: 'YogiUI',
     },
     rollupOptions: {
-      external: ['react', 'react-dm', '@headlessui/react'],
+      external: ['react', 'react-dom', '@headlessui/react'],
       output: {
         globals: {
           react: 'React',

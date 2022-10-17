@@ -110,6 +110,10 @@ export default function Drawer({
 }: PropsWithChildren<Props>) {
   const directionClasses = directionProps[direction];
 
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
   return createPortal(
     <DrawerContext.Provider value={{ onClose }}>
       <Transition.Root show={open} as={Fragment}>
